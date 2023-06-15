@@ -11,7 +11,7 @@ import {
 } from "../../Actions/User";
 import { useEffect } from "react";
 import { Avatar, Button, Typography, Dialog } from "@mui/material";
-import { useAlert } from "react-alert";
+import {toast} from "react-hot-toast";
 import User from "../User/User";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -31,8 +31,7 @@ const UserProfile = () => {
   } = useSelector((state) => state.like);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
-  const params = useParams();
+  const alert = useAlert();  const params = useParams();
 
   const [followersToggle, setFollowersToggle] = useState(false);
   const [followingToggle, setFollowingToggle] = useState(false);
@@ -69,23 +68,23 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (followError) {
-      alert.error(followError);
+      toast.error(followError);
       dispatch({ type: "clearErrors" });
     }
     if (userError) {
-      alert.error(userError);
+      toast.error(userError);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, error, message, userError, followError, dispatch]);
+  }, [ error, message, userError, followError, dispatch]);
 
   return loading === true || userLoading === true ? (
     <Loader />

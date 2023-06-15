@@ -6,15 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteMyProfile, getMyPosts, logoutUser } from "../../Actions/User";
 import { useEffect } from "react";
 import { Avatar, Button, Typography, Dialog } from "@mui/material";
-import { useAlert } from "react-alert";
 import User from "../User/User";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import {toast} from "react-hot-toast";
 
 const Account = () => {
   const dispatch = useDispatch();
-  const alert = useAlert();
-
   const { loading, error, posts } = useSelector((state) => state.myPosts);
   const {
     error: likeError,
@@ -31,19 +29,19 @@ const Account = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (likeError) {
-      alert.error(likeError);
+      toast.error(likeError);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, error, message, likeError, dispatch]);
+  }, [ error, message, likeError, dispatch]);
 
   const logoutHandler = async () => {
     await dispatch(logoutUser());

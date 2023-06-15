@@ -3,18 +3,17 @@ import React from "react";
 import { useState } from "react";
 import "./NewPost.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
 import { useEffect } from "react";
 import { createNewPost } from "../../Actions/Post";
 import { loadUser } from "../../Actions/User";
-
+import {toast} from "react-hot-toast";
 const NewPost = () => {
   const [image, setImage] = useState(null);
   const [caption, setCaption] = useState("");
   const { error, loading, message } = useSelector((state) => state.like);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
+ 
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -38,15 +37,15 @@ const NewPost = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [error, alert, message, dispatch]);
+  }, [error,  message, dispatch]);
 
   return (
     <div className="newPost">

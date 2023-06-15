@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import "./ResetPassword.css";
 import { Typography, Button } from "@mui/material";
 import { resetPassword } from "../../Actions/User";
-import { useAlert } from "react-alert";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-
+import {toast} from "react-hot-toast";
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
 
   const { error, message, loading } = useSelector((state) => state.like);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
+
 
   const params = useParams();
 
@@ -24,14 +23,14 @@ const ResetPassword = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, error, message, dispatch]);
+  }, [error, message, dispatch]);
 
   return (
     <div className="resetPassword">

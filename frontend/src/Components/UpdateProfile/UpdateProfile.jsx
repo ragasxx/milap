@@ -3,11 +3,10 @@ import { useState } from "react";
 import "./UpdateProfile.css";
 import { Typography, Button, Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
 import { useEffect } from "react";
 import { loadUser, updateProfile } from "../../Actions/User";
 import Loader from "../Loader/Loader";
-
+import {toast} from "react-hot-toast";
 const UpdateProfile = () => {
   const { loading, error, user } = useSelector((state) => state.user);
   const {
@@ -22,7 +21,7 @@ const UpdateProfile = () => {
   const [avatarPrev, setAvatarPrev] = useState(user.avatar.url);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
+
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -39,19 +38,19 @@ const UpdateProfile = () => {
   };
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (updateError) {
-      alert.error(updateError);
+      toast.error(updateError);
       dispatch({ type: "clearErrors" });
     }
 
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [updateError, message, alert, error, dispatch]);
+  }, [updateError, message,  error, dispatch]);
 
   const submitHandler = async (e) => {
     e.preventDefault();

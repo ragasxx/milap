@@ -5,14 +5,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Actions/User";
-import { useAlert } from "react-alert";
 import { useEffect } from "react";
-
+import {toast} from "react-hot-toast";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const alert = useAlert();
+  
 
   const { error } = useSelector((state) => state.user);
   const { message } = useSelector((state) => state.like);
@@ -24,14 +23,14 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, error, message, dispatch]);
+  }, [ error, message, dispatch]);
 
   return (
     <div className="login">

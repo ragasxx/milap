@@ -4,8 +4,8 @@ import { Typography, Button } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePassword } from "../../Actions/Post";
-import { useAlert } from "react-alert";
 import { useEffect } from "react";
+import {toast} from "react-hot-toast";
 const UpdatePassword = () => {
   const {
     error: updatePasswordError,
@@ -16,17 +16,17 @@ const UpdatePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const dispatch = useDispatch();
-  const alert = useAlert();
+ 
   useEffect(() => {
     if (updatePasswordError) {
-      alert.error(updatePasswordError);
+      toast.error(updatePasswordError);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, dispatch, updatePasswordError, message]);
+  }, [dispatch, updatePasswordError, message]);
 
   const updateHandler = async (e) => {
     e.preventDefault();

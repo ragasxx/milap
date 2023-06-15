@@ -5,8 +5,9 @@ import { Typography, Button, Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser } from "../../Actions/User";
-import { useAlert } from "react-alert";
+
 import { useEffect } from "react";
+import {toast} from "react-hot-toast";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -17,7 +18,6 @@ const Register = () => {
   const { loading, error,message } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -33,14 +33,14 @@ const Register = () => {
   };
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch({ type: "clearErrors" });
     }
     if (message) {
-      alert.success(message);
+      toast.success(message);
       dispatch({ type: "clearMessage" });
     }
-  }, [alert, error,message, dispatch]);
+  }, [ error,message, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();
