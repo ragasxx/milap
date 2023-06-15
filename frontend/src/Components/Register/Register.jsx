@@ -14,7 +14,7 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  const { loading, error } = useSelector((state) => state.user);
+  const { loading, error,message } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -36,7 +36,11 @@ const Register = () => {
       alert.error(error);
       dispatch({ type: "clearErrors" });
     }
-  }, [alert, error, dispatch]);
+    if (message) {
+      alert.success(message);
+      dispatch({ type: "clearMessage" });
+    }
+  }, [alert, error,message, dispatch]);
 
   const submitHandler = (e) => {
     e.preventDefault();

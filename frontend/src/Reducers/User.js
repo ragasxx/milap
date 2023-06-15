@@ -63,6 +63,9 @@ export const userReducer = createReducer(initialState, {
   clearErrors: (state) => {
     state.error = null;
   },
+  clearMessage:(state)=>{
+    state.message=null;
+  }
 });
 
 export const postOfFollowingReducer = createReducer(initialState, {
