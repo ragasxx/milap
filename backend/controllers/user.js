@@ -30,6 +30,8 @@ export const register = async (req, res) => {
     const options = {
       expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      secure:true,
+      sameSite:"none",
     };
 
     const token = await user.generateToken();
@@ -37,7 +39,7 @@ export const register = async (req, res) => {
     res.status(201).cookie("token", token, options).json({
       success: true,
       user,
-      token,
+      message:"Registered successfully"
     });
   } catch (error) {
     res.status(500).json({
@@ -74,6 +76,8 @@ export const login = async (req, res) => {
     const options = {
       expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
       httpOnly: true,
+      secure:true,
+      sameSite:"none"
     };
 
     const token = await user.generateToken();
@@ -81,7 +85,7 @@ export const login = async (req, res) => {
     res.status(201).cookie("token", token, options).json({
       success: true,
       user,
-      token,
+      message:`welcome back ${user.name}`,
     });
   } catch (error) {
     res.status(500).json({
@@ -95,7 +99,7 @@ export const logOut = async (req, res) => {
   try {
     res
       .status(200)
-      .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+      .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true,secure:true,sameSite:"none" })
       .json({
         success: true,
         message: "Logged Out",
