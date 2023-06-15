@@ -15,7 +15,7 @@ import ForgotPassword from "./Components/ForgotPassword/ForgotPassword";
 import ResetPassword from "./Components/ResetPassword/ResetPassword";
 import UserProfile from "./Components/UserProfile/UserProfile";
 import Search from "./Components/Search/Search";
-import toast,{Toaster} from "react-hot-toast";
+import {Toaster} from "react-hot-toast";
 
 function App() {
  

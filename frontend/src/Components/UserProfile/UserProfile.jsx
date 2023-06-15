@@ -31,7 +31,7 @@ const UserProfile = () => {
   } = useSelector((state) => state.like);
 
   const dispatch = useDispatch();
-  const alert = useAlert();  const params = useParams();
+ const params = useParams();
 
   const [followersToggle, setFollowersToggle] = useState(false);
   const [followingToggle, setFollowingToggle] = useState(false);
