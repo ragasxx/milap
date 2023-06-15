@@ -43,7 +43,7 @@ export const RegisterUser =
         {
           headers: {
             "Content-Type": "application/json",
-          },
+          },withCredentials:true,
         }
       );
 
@@ -71,7 +71,7 @@ export const updateProfile = (name, email, avatar) => async (dispatch) => {
       {
         headers: {
           "Content-Type": "application/json",
-        },
+        },withCredentials:true,
       }
     );
 
@@ -120,7 +120,7 @@ export const forgotPassword = (email) => async (dispatch) => {
       {
         headers: {
           "Content-Type": "application/json",
-        },
+        },withCredentials:true,
       }
     );
 
@@ -150,7 +150,7 @@ export const resetPassword = (token, password) => async (dispatch) => {
       {
         headers: {
           "Content-Type": "application/json",
-        },
+        },withCredentials:true,
       }
     );
 
@@ -172,7 +172,7 @@ export const loadUser = () => async (dispatch) => {
       type: "LoadUserRequest",
     });
 
-    const { data } = await axios.get(`${server}/me`);
+    const { data } = await axios.get(`${server}/me`,{withCredentials:true},);
 
     dispatch({
       type: "LoadUserSuccess",
@@ -192,7 +192,7 @@ export const getFollowingPosts = () => async (dispatch) => {
       type: "postOfFollowingRequest",
     });
 
-    const { data } = await axios.get(`${server}/posts`);
+    const { data } = await axios.get(`${server}/posts`,{withCredentials:true,});
 
     dispatch({
       type: "postOfFollowingSuccess",
@@ -212,7 +212,7 @@ export const getMyPosts = () => async (dispatch) => {
       type: "myPostRequest",
     });
    
-    const { data } = await axios.get(`${server}/my/posts`);
+    const { data } = await axios.get(`${server}/my/posts`,{withCredentials:true,});
 
     dispatch({
       type: "myPostSuccess",
@@ -232,7 +232,7 @@ export const getUserPosts = (id) => async (dispatch) => {
       type: "userPostsRequest",
     });
 
-    const { data } = await axios.get(`${server}/userposts/${id}`);
+    const { data } = await axios.get(`${server}/userposts/${id}`,{withCredentials:true,});
 
     dispatch({
       type: "userPostsSuccess",
@@ -252,7 +252,7 @@ export const getUserProfile = (id) => async (dispatch) => {
       type: "userProfileRequest",
     });
 
-    const { data } = await axios.get(`${server}/user/${id}`);
+    const { data } = await axios.get(`${server}/user/${id}`,{withCredentials:true,});
 
     dispatch({
       type: "userProfileSuccess",
@@ -272,7 +272,7 @@ export const followAndUnfollowUser = (id) => async (dispatch) => {
       type: "followUserRequest",
     });
 
-    const { data } = await axios.get(`${server}/follow/${id}`);
+    const { data } = await axios.get(`${server}/follow/${id}`,{withCredentials:true,});
 
     dispatch({
       type: "followUserSuccess",
@@ -294,7 +294,7 @@ export const getAllUsers =
         type: "allUsersRequest",
       });
 
-      const { data } = await axios.get(`${server}/users?name=${name}`);
+      const { data } = await axios.get(`${server}/users?name=${name}`,{withCredentials:true,});
 
       dispatch({
         type: "allUsersSuccess",
@@ -314,7 +314,7 @@ export const logoutUser = () => async (dispatch) => {
       type: "LogoutUserRequest",
     });
 
-    await axios.get(`${server}/logout`);
+    await axios.get(`${server}/logout`,{withCredentials:true,});
 
     dispatch({
       type: "LogoutUserSuccess",

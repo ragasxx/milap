@@ -17,6 +17,7 @@ import UserProfile from "./Components/UserProfile/UserProfile";
 import Search from "./Components/Search/Search";
 
 function App() {
+ 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadUser());
