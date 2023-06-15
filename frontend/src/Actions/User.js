@@ -1,4 +1,5 @@
 import axios from "axios";
+import {server} from "../store.js"
 
 export const loginUser = (email, password) => async (dispatch) => {
   try {
@@ -7,7 +8,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     });
 
     const { data } = await axios.post(
-      "/api/v1/login",
+      `${server}/login`,
       { email, password },
       {
         headers: {
@@ -36,7 +37,7 @@ export const RegisterUser =
       });
 
       const { data } = await axios.post(
-        "/api/v1/register",
+        `${server}/register`,
         { name, email, password, avatar },
         {
           headers: {
@@ -64,7 +65,7 @@ export const updateProfile = (name, email, avatar) => async (dispatch) => {
     });
 
     const { data } = await axios.put(
-      "/api/v1/update/profile",
+      `${server}/update/profile`,
       { name, email, avatar },
       {
         headers: {
@@ -91,7 +92,7 @@ export const deleteMyProfile = () => async (dispatch) => {
       type: "deleteProfileRequest",
     });
 
-    const { data } = await axios.delete("/api/v1/delete/me");
+    const { data } = await axios.delete(`${server}/delete/me`);
 
     dispatch({
       type: "deleteProfileSuccess",
@@ -111,7 +112,7 @@ export const forgotPassword = (email) => async (dispatch) => {
     });
 
     const { data } = await axios.post(
-      "/api/v1/forgot/password",
+      `${server}/forgot/password`,
       {
         email,
       },
@@ -141,7 +142,7 @@ export const resetPassword = (token, password) => async (dispatch) => {
     });
 
     const { data } = await axios.put(
-      `/api/v1/password/reset/${token}`,
+      `${server}/password/reset/${token}`,
       {
         password,
       },
@@ -170,7 +171,7 @@ export const loadUser = () => async (dispatch) => {
       type: "LoadUserRequest",
     });
 
-    const { data } = await axios.get("/api/v1/me");
+    const { data } = await axios.get(`${server}/me`);
 
     dispatch({
       type: "LoadUserSuccess",
@@ -190,7 +191,7 @@ export const getFollowingPosts = () => async (dispatch) => {
       type: "postOfFollowingRequest",
     });
 
-    const { data } = await axios.get("/api/v1/posts");
+    const { data } = await axios.get(`${server}/posts`);
 
     dispatch({
       type: "postOfFollowingSuccess",
@@ -209,8 +210,8 @@ export const getMyPosts = () => async (dispatch) => {
     dispatch({
       type: "myPostRequest",
     });
-
-    const { data } = await axios.get("/api/v1/my/posts");
+   
+    const { data } = await axios.get(`${server}/my/posts`);
 
     dispatch({
       type: "myPostSuccess",
@@ -230,7 +231,7 @@ export const getUserPosts = (id) => async (dispatch) => {
       type: "userPostsRequest",
     });
 
-    const { data } = await axios.get(`/api/v1/userposts/${id}`);
+    const { data } = await axios.get(`${server}/userposts/${id}`);
 
     dispatch({
       type: "userPostsSuccess",
@@ -250,7 +251,7 @@ export const getUserProfile = (id) => async (dispatch) => {
       type: "userProfileRequest",
     });
 
-    const { data } = await axios.get(`/api/v1/user/${id}`);
+    const { data } = await axios.get(`${server}/user/${id}`);
 
     dispatch({
       type: "userProfileSuccess",
@@ -270,7 +271,7 @@ export const followAndUnfollowUser = (id) => async (dispatch) => {
       type: "followUserRequest",
     });
 
-    const { data } = await axios.get(`/api/v1/follow/${id}`);
+    const { data } = await axios.get(`${server}/follow/${id}`);
 
     dispatch({
       type: "followUserSuccess",
@@ -292,7 +293,7 @@ export const getAllUsers =
         type: "allUsersRequest",
       });
 
-      const { data } = await axios.get(`/api/v1/users?name=${name}`);
+      const { data } = await axios.get(`${server}/users?name=${name}`);
 
       dispatch({
         type: "allUsersSuccess",
@@ -312,7 +313,7 @@ export const logoutUser = () => async (dispatch) => {
       type: "LogoutUserRequest",
     });
 
-    await axios.get("/api/v1/logout");
+    await axios.get(`${server}/logout`);
 
     dispatch({
       type: "LogoutUserSuccess",

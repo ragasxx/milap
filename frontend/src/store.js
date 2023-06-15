@@ -8,6 +8,8 @@ import {
 
 import { likeReducer, myPostReducer, userPostsReducer } from "./Reducers/Post";
 
+ export const server = `https://milap.vercel.app/api/v1`
+
 const store = configureStore({
   reducer: {
     user: userReducer,
